@@ -1,0 +1,8 @@
+config:
+  bantads:account-db-read: bd
+  bantads:account-db-write: bd
+  bantads:account-image: account-image
+  bantads:mongoDb-image: mongo
+  bantads:rabbitMQ-image: rabbitmq:3.9-management
+  
+  docker:host: npipe:////.//pipe//docker_engine
