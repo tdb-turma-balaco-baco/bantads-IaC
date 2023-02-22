@@ -1,8 +1,12 @@
 config:
-  bantads:account-db-read: bd
-  bantads:account-db-write: bd
-  bantads:account-image: account-image
+  bantads:account-image: bantads/account:1.0
+  bantads:auth-image: bantads/auth:1.0
+  bantads:client-image: bantads/client:1.0
+  bantads:manager-image: bantads/manager:1.0
+  bantads:saga-image: bantads/saga:1.0
+  bantads:notification-image: bantads/notification:1.0
   bantads:mongoDb-image: mongo
+  bantads:pgadmin-image: dpage/pgadmin4
+  bantads:postgress-image: postgres
   bantads:rabbitMQ-image: rabbitmq:3.9-management
-  
   docker:host: npipe:////.//pipe//docker_engine
