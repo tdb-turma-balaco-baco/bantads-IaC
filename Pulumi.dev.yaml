@@ -3,7 +3,7 @@ config:
   bantads:auth-image: bantads/auth:1.0
   bantads:client-image: bantads/client:1.0
   bantads:front-image: bantads/front:1.0
-  bantads:gateway-image: batands/gateway:1.0
+  bantads:gateway-image: bantads/gateway:1.0
   bantads:manager-image: bantads/manager:1.0
   bantads:mongoDb-image: mongo
   bantads:notification-image: bantads/notification:1.0

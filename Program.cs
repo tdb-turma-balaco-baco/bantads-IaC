@@ -30,12 +30,12 @@ return await Deployment.RunAsync((Action)(() =>
 
     CreateFrontEnd(msFrontImage, network);
     CreateApiGateway(msGatewayImage, network);
-    CreateNotificationMicroservice(msNotificationImage, network);
-    CreateManagerMicroservice(msManagerImage, postgresImage: postgressDbImage, network);
+    //CreateNotificationMicroservice(msNotificationImage, network);
+    //CreateManagerMicroservice(msManagerImage, postgresImage: postgressDbImage, network);
     CreateAuthMicroservice(mongoDbImageName, msAuthImage, network);
-    CreateClientMicroservice(msClientImageName, postgressDbImage, network);
-    CreateAccountMicroservice(msAccountImage, postgressDbImage,network);
-    CreateSaga(msSaga, network);
+    //CreateClientMicroservice(msClientImageName, postgressDbImage, network);
+    //CreateAccountMicroservice(msAccountImage, postgressDbImage,network);
+    //CreateSaga(msSaga, network);
 
     var pgAdminImage = StackHelper.GetDockerImage(pgAdminImageName, "PgAdmin");
 
@@ -101,6 +101,7 @@ static void CreateManagerMicroservice(string msManagerImage, Docker.RemoteImage 
 
     var managerApp = new Docker.Container("MS-Manager", new Docker.ContainerArgs
     {
+        Name = "bantadsManager",
         Image = msManager.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
                   new Docker.Inputs.ContainerPortArgs
@@ -131,6 +132,7 @@ static void CreateClientMicroservice(string msClientImage, Docker.RemoteImage po
 
     var clientApp = new Docker.Container("MS-Client", new Docker.ContainerArgs
     {
+        Name = "bantadsClient",
         Image = msClient.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
                   new Docker.Inputs.ContainerPortArgs
@@ -159,6 +161,7 @@ static void CreateSaga(string msSagaImage, Docker.Network network)
 
     var sagaApp = new Docker.Container("Saga", new Docker.ContainerArgs
     {
+        Name = "bantadsSaga",
         Image = saga.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
                   new Docker.Inputs.ContainerPortArgs
@@ -251,6 +254,7 @@ static void CreateAuthMicroservice(string mongoDbImageName, string authImage, Do
 
     var authApp = new Docker.Container("MS-Auth", new Docker.ContainerArgs
     {
+        Name = "bantadsAuth",
         Image = msAuth.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
          new Docker.Inputs.ContainerPortArgs
@@ -285,6 +289,7 @@ static void CreateAccountMicroservice(string imageName, Docker.RemoteImage postg
 
     var accountApp = new Docker.Container("MS-Account", new Docker.ContainerArgs
     {
+        Name = "bantadsAccount",
         Image = msAccount.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
          new Docker.Inputs.ContainerPortArgs
@@ -316,6 +321,7 @@ static void CreateNotificationMicroservice(string msNotificationImage, Docker.Ne
 
     var notificationApp = new Docker.Container("MS-Notification", new Docker.ContainerArgs
     {
+        Name = "bantadsNotification",
         Image = msNotification.Latest,
         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
          new Docker.Inputs.ContainerPortArgs
