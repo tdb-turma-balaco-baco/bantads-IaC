@@ -2,11 +2,13 @@ config:
   bantads:account-image: bantads/account:1.0
   bantads:auth-image: bantads/auth:1.0
   bantads:client-image: bantads/client:1.0
+  bantads:front-image: bantads/front:1.0
+  bantads:gateway-image: batands/gateway:1.0
   bantads:manager-image: bantads/manager:1.0
-  bantads:saga-image: bantads/saga:1.0
-  bantads:notification-image: bantads/notification:1.0
   bantads:mongoDb-image: mongo
+  bantads:notification-image: bantads/notification:1.0
   bantads:pgadmin-image: dpage/pgadmin4
   bantads:postgress-image: postgres
   bantads:rabbitMQ-image: rabbitmq:3.9-management
+  bantads:saga-image: bantads/saga:1.0
   docker:host: npipe:////.//pipe//docker_engine

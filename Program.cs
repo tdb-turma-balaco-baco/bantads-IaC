@@ -19,6 +19,8 @@ return await Deployment.RunAsync((Action)(() =>
     var msAccountImage = configs.Require(key: "account-image");
     var msSaga = configs.Require(key: "saga-image");
     var msAuthImage = configs.Require("auth-image");
+    var msFrontImage = configs.Require("front-image");
+    var msGatewayImage = configs.Require("gateway-image");
 
     var network = new Docker.Network("network-bantads");
 
@@ -26,6 +28,8 @@ return await Deployment.RunAsync((Action)(() =>
 
     var postgressDbImage = StackHelper.GetDockerImage(postgresImageName, "PostgreSQL");
 
+    CreateFrontEnd(msFrontImage, network);
+    CreateApiGateway(msGatewayImage, network);
     CreateNotificationMicroservice(msNotificationImage, network);
     CreateManagerMicroservice(msManagerImage, postgresImage: postgressDbImage, network);
     CreateAuthMicroservice(mongoDbImageName, msAuthImage, network);
@@ -173,6 +177,53 @@ static void CreateSaga(string msSagaImage, Docker.Network network)
                      Name = network.Name
                   }
             }
+    });
+}
+
+static void CreateFrontEnd(string msFrontImagem, Docker.Network network)
+{
+    var front = StackHelper.GetDockerImage(msFrontImagem, "bantads-front");
+
+    var frontApp = new Docker.Container("front", new Docker.ContainerArgs
+    {
+         Image = front.Latest,
+         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
+            new Docker.Inputs.ContainerPortArgs
+            {
+               Internal = 80,
+               External = 4002
+            }
+         },
+         NetworksAdvanced = new InputList<Docker.Inputs.ContainerNetworksAdvancedArgs> {
+            new Docker.Inputs.ContainerNetworksAdvancedArgs
+            {
+               Name = network.Name
+            }
+         }
+    });
+}
+
+
+static void CreateApiGateway(string msGatewayImage, Docker.Network network)
+{
+    var gateway = StackHelper.GetDockerImage(msGatewayImage, "bantads-gateway");
+
+    var gatewayApp = new Docker.Container("gateway", new Docker.ContainerArgs
+    {
+         Image = gateway.Latest,
+         Ports = new InputList<Docker.Inputs.ContainerPortArgs> {
+            new Docker.Inputs.ContainerPortArgs
+            {
+               Internal = 8080,
+               External = 3000
+            }
+         },
+         NetworksAdvanced = new InputList<Docker.Inputs.ContainerNetworksAdvancedArgs> {
+            new Docker.Inputs.ContainerNetworksAdvancedArgs
+            {
+               Name = network.Name
+            }
+         }
     });
 }
 
