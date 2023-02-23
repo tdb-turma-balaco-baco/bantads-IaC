@@ -30,12 +30,12 @@ return await Deployment.RunAsync((Action)(() =>
 
     CreateFrontEnd(msFrontImage, network);
     CreateApiGateway(msGatewayImage, network);
-    //CreateNotificationMicroservice(msNotificationImage, network);
-    //CreateManagerMicroservice(msManagerImage, postgresImage: postgressDbImage, network);
+    CreateNotificationMicroservice(msNotificationImage, network);
+    CreateManagerMicroservice(msManagerImage, postgresImage: postgressDbImage, network);
     CreateAuthMicroservice(mongoDbImageName, msAuthImage, network);
-    //CreateClientMicroservice(msClientImageName, postgressDbImage, network);
-    //CreateAccountMicroservice(msAccountImage, postgressDbImage,network);
-    //CreateSaga(msSaga, network);
+    CreateClientMicroservice(msClientImageName, postgressDbImage, network);
+    CreateAccountMicroservice(msAccountImage, postgressDbImage,network);
+    CreateSaga(msSaga, network);
 
     var pgAdminImage = StackHelper.GetDockerImage(pgAdminImageName, "PgAdmin");
 
